@@ -1,75 +1,90 @@
-html,body {
+html,body 
+{
 	height:100%;
-	background-color: #fffbbf
+	background-image: url("../img/oble.jpg");
+	background-size: 100%;
+	overflow: hidden;
+}
+		
+#navbar
+{
+	background-image: url("../img/header_background.png");
+	background-size: 65px 65px;
+	height: 65px;
+	background-repeat: repeat-x;
+			
+	color: white;
+}
+		
+.navbar-form
+{
+	margin-top: 16px;
 }
 
-.carousel,.item,.active{
+.form-control
+{
+	margin-top: 2px;
+}
+
+.btn
+{
+	margin-top: 1px;
+}
+		
+#footer
+{
+	position: fixed;
+	background:#550a0a; 
+}
+
+
+.carousel{
 	height: 70%;
-	background: #F1EFE2;
+	width: 65%;
+	background: #ffffff;
+	margin: 70px auto;
+	opacity:0.7;
+}
+
+.item, .active{
+	height: 70%;
+
 }
 
 .carousel-inner{
-	height:100%;
+	height: 100%;
 }
 
-.carousel-caption {
-	position: fixed;
+.carousel-caption{
+	margin: 0 0 0 -35%;
+	width: 100%;
+	left: 45%;
+	position: absolute;
 	text-align: left;
 	color: #000000;
 }
 
-.header-image{
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}
+		
+.header-image
+{
 	margin: 0 0 0 50px;
 }
 
-
-.separator{
+.separator
+{
 	height: 15%;
 }
-/* eto dapat sa left most at right most para di masagad yung carousel kaso di ko mapagana ):
-.sep{
-	width: 30%;
-}
 
-.sep-2{
-	left: 100%;
-}
-*/
-#navbar_top{
-	/* This is the "sablay" background... and is not dynamic */
-	background-image: url("../../img/header_background.png");
-    background-size: 70px 70px;
-    background-repeat: repeat-x;
-	
-	background:#550a0a; 
-	color: white;
-}
-
-.navbar-form{
-	margin-top: 23px;
-	margin-left: 20px;
-	margin-bottom: 10px;
-}
-
-.form-control{
-	margin-top: 2px;
-}
-
-.btn{
-	margin-top: 1px;
-}
-
-#navbar_bottom{
-	position: fixed;
-	background:#550a0a; 
-}
-
-.nav-brand{
-	margin-top: 50px;
-	margin-left: -10px;
-}
-
-#content {
+#content 
+{
 	width: 95%;
 	margin-top: 1%;
 	margin-right: auto;

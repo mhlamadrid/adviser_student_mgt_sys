@@ -3,53 +3,42 @@
 class Main_control extends CI_Controller {
     function __construct() {
         parent::__construct();
+		
+		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Cache-Control: post-check=0, pre-check=0', FALSE);
+		header('Pragma: no-cache');		
+
         //load session and connect to database
-        $this->load->model('admin_login_model','login',TRUE);
-        $this->load->helper(array('form', 'url','html'));
-        $this->load->library(array('form_validation','session'));
+        $this->load->model('login_model','login',TRUE);
+		$this->load->model('announcement_model','announce_mdl', TRUE);
     }
  
     function index() {
-		if(isset($_POST['logout'])){
-			$this->logout();
-		}
-		else if(isset($_POST['generate_username'])) {
-			$data['username'] = filter_var($_POST['generate_username'], FILTER_SANITIZE_STRING);
-			$data['passencrypted'] = md5($this->generateRandomString(20));
-			$data['role'] = 'adviser';
-			$result = $this->login->insert_admin($data);
-			$this->refresh_page();
-		}
-		else if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in'))
         {
             $session_data = $this->session->userdata('logged_in');
 			redirect($session_data['role'].'_control', 'refresh');
 			
         } else {
         //If no session, redirect to login page
-            $this->login();
+			$data['announcements'] = $this->announce_mdl->get_all();
+            $this->load->view('login_view', $data);
         }
+
     }
 	 
 	function login(){
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
         if($this->form_validation->run() == FALSE) {
-            $this->load->view('admin_login_view',NULL);
+			$data['announcements'] = $this->announce_mdl->get_all();
+            $this->load->view('login_view', $data);
         } else {
             //Go to private area
-			$this->refresh_page();
+			$session_data = $this->session->userdata('logged_in');
+			redirect($session_data['role'].'_control', 'refresh');
         }
-	}
-
-	function logout() {
-        //remove all session data
-		if($this->session->userdata('logged_in')) {
-			$this->session->unset_userdata('logged_in');
-			$this->session->sess_destroy();
-			$this->refresh_page();
-		}
-		//redirect(base_url('admin_login'), 'refresh');
 	}
  
     function check_database($password) {
@@ -71,6 +60,16 @@ class Main_control extends CI_Controller {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return FALSE;
 		}
+	}
+	
+	function logout() {
+        //remove all session data
+		if($this->session->userdata('logged_in')) {
+			$this->session->unset_userdata('logged_in');
+			$this->session->sess_destroy();
+		}
+		redirect('main_control', 'refresh');
+		//$this->refresh_page();
 	}
 	  
 	function refresh_page() {  
