@@ -62,7 +62,7 @@
 								$image_properties = array(
 										'src'   => base_url('img/prof_pic.jpg'),
 										'alt'   => 'Me, demonstrating how to eat 4 slices of pizza at one time',
-										'class' => 'post_images',
+										'class' => 'post_images img-thumbnail',
 										'width' => '120',
 										'height'=> '90',
 										'title' => 'That was quite a night',
@@ -74,20 +74,10 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<?= form_open('main_control/changePassword');?>
-							<!--<form method="post" action=''>-->
-							<!-- <form method="post" action="<?php echo base_url();?>index.php/main_control/changePassword"> -->
-							<div class="col-md-12">
-								<input class="btn btn-primary form-control" type="submit" name="accountsettings" value="Account Settings"/>
-							</div>
-							</form>						
-						</li>
-						
-						<li>
 							<?= form_open('main_control/logout');?>
 							<!--<form method="post" action=''>-->
 							<div class="col-md-12">
-								<input class="btn btn-primary form-control" type="submit" name="logout" value="Logout"/>
+								<input class="btn btn-link form-control" type="submit" name="logout" value="logout"/>
 							</div>
 							</form>						
 						</li>

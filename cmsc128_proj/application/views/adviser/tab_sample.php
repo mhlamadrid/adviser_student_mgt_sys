@@ -6,16 +6,6 @@
 		<div class="panel-body">  
 			Student information here...
 
-			<?= form_open('adviser_control/adviserRequest');
-				//$js['onClick']="requestSent()";
-				$attr = array(
-						'class' => "btn btn-default",
-						'value' =>  "Request Contact Information"
-					);
-				echo form_submit($attr);
-				echo form_close();
-			?>
-
 			<?= form_open('adviser_control/adviserShowNotifs');
 				$attr =  array(
 						'value' => 'Show Notifications',

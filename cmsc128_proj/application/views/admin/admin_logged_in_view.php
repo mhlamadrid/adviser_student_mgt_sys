@@ -50,12 +50,12 @@
 	</style>
  </head>
  <body>	
-	<!---Modals-->
+	<!---Modals--->
 	<?Php $this->load->view('admin/announce_add_modal');?>
 	<?Php $this->load->view('admin/announce_edit_modal');?>
 	<?Php $this->load->view('admin/generate_account_modal');?>
 	
-	<!---Header-->
+	<!---Header--->
 	<?Php $this->load->view('header_view');?>
 
 	<div class="container">
@@ -86,7 +86,7 @@
 		</div>
 	</div>
 	
-	<!---Footer-->
+	<!---Footer--->
 	<?Php $this->load->view('footer_view');?>
 	
  </body>

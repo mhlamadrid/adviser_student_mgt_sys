@@ -21,11 +21,11 @@
 	</style>	
  </head>
  <body>	
-	<!--MODAL-->
-	<?php $this->load->view('student/curriculum_modal');?>
-	<!--MODAL-->
+	<!--MODAL-------------------------------------------->
+	<?Php $this->load->view('student/curriculum_modal');?>
+	<!--MODAL-------------------------------------------->
 
-	<!---Header-->
+	<!---Header--->
 	<?Php $this->load->view('header_view');?>
 
 	<div class="container">
@@ -37,7 +37,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-9 col-md-9">
-			<!--TABS-->
+			<!--TABS----------------------------------------------------------------------------------------------------->
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<ul class="nav nav-tabs" role="tablist" id="myTab">
@@ -53,17 +53,17 @@
 						</div>
 					</div>
 				</div>
-			<!--TABS-->
+			<!--TABS----------------------------------------------------------------------------------------------------->
 			</div>
 			
 			<div class="col-xs-12 col-sm-3 col-md-3">
-				<?php $this->load->view('student/student_panel');?>
+				<?Php $this->load->view('student/student_panel');?>
 			</div>
 		</div>
 	</div>
 	
-	<!---Footer-->
-	<?php $this->load->view('footer_view');?>
+	<!---Footer--->
+	<?Php $this->load->view('footer_view');?>
 	
  </body>
 </html>

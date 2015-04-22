@@ -26,16 +26,4 @@ class Admin_account_model extends CI_Controller {
 		$query=$this->db->query("SELECT password FROM admin WHERE username='{$username}'");
 		return $query->result();
 	}
-	
-	public function change_password($data) {
-		$query = $this->db->query("SELECT * FROM admin where username = '{$data['username']}'");
-		
-		if($query->num_rows() == 0){
-			$this->db->query("UPDATE admin SET password = {$data['passencrypted']}");
-			return true;
-		}
-
-		return false;
-	}
-	
 }

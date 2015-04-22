@@ -1,86 +1,29 @@
 <div role="tabpanel" class="tab-pane" id="tab_announcement">
 	<div class="panel panel-default" style="margin-top:10px">
-		<div class="panel-body">    
+		<div class="panel-body" id="result-announcements">    
 		<!--announcements tab HERE-->
-		<?Php if (validation_errors()) {?><p class="lead"><em><?= heading(validation_errors(), 4);?></em></p><?Php }?>		
-		
-		<?php 
-			$attr = array(
-					'type'          => 'button',
-					'class' 	  => "btn btn-primary btn-block",
-					'data-toggle' => "modal",
-					'data-target' => "#add_Modal",
-					);
-			echo anchor('#add_Modal',"<span class='glyphicon glyphicon-plus'></span> &nbsp; CREATE NEW ANNOUNCEMENT", $attr);
-		?>
-			
-		<?Php
-			echo br();
-			if ($announcements != null){
-		?>
-				<table class="table table-hover table-striped">
-					<th>Date Posted</th>
-					<th>Title</th>
-					<th>Body</th>
-					<th>Attachment</th>
-					<th></th>
-		<?Php		foreach ($announcements as $row){
-			
-						echo form_open('admin_control/del_announcement');
-		?>
-					<tr>
-						<td>
-							<?= $row->date;?>
-						</td>
-						
-						<td>
-							<?= $row->title;?>
-						</td>
-						
-						<td>
-							<a class="tool-tip" data-toggle="tooltip" data-placement="right" title="<?= $row->body;?>">
-								preview of body...
-							</a>
-						</td>
-						
-						<td>
-							<span class="glyphicon glyphicon-paperclip"></span>
-						</td>
-						
-						<td>
-							<div class="btn-group btn-block">
-		<?Php
-							echo form_hidden('id', $row->id);
-										
-							$attr = array(
-									'class' 	  => "btn btn-link",
-									'data-toggle' => "modal",
-									'data-target' => "#edit_Modal",
-									'data-id' => $row->id,
-									'data-date' => $row->date,
-									'data-title' => $row->title,
-									'data-body' => $row->body
-									);
-							echo anchor("#edit_Modal", "Edit <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>", $attr);
-		?>
-							&nbsp;
-							
-							<button type="submit" class="btn btn-link"> Delete <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
-		<?Php						
-							echo form_close();
-		?>
-							</div>
-						</td>
-					</tr>
-		<?Php
-				}
-		?>
-				</table>
-		<?Php
-			}else echo heading("No Announcements.",4);
-		?>
-
+			No announcements.
 		<!--announcements tab HERE-->		
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$.ajax({
+			type: 'POST',
+				 
+			//We are going to make the request to the method "list_dropdown" in the match controller
+			url: '<?php echo site_url();?>/admin_control/get_announcements', 
+				 
+			//When the request is successfully completed, this function will be executed
+			success: function(resp) { 
+				//With the ".html()" method we include the html code returned by AJAX into the matches list
+				$("#result-announcements").html(resp);
+			},
+			error: function(){						
+				alert('Error while request..');
+			}
+		});
+	});
+</script>

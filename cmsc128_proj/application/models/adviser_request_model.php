@@ -2,11 +2,13 @@
 
 	class Adviser_request_model extends CI_model{
 
-		public function checkMessage($adviser_id, $student_no){
+		public function checkMessage($adviser_id){
 
-			$check_query =  $this->db->query("SELECT * FROM student_adviser WHERE emp_id = '$adviser_id' AND stud_no = '$student_no';");
+			$check_query =  $this->db->query("SELECT * FROM student_adviser WHERE emp_id = '$adviser_id';");
 			foreach ($check->query() as $row) {
-
+				if($check->has_contact){
+					return true;
+				}else return false;
 			}
 			//check in table student_adviser if column has_contact is set to true
 			//if true = show student contact info
@@ -14,8 +16,6 @@
 		}
 		
 		public function requestInfo($adviser_id, $student_no){
-			 //$this->checkMessage();
-
 			// $query = $this->db->query("SELECT * FROM adviser WHERE emp_id = '$adviser_id';");
 			// foreach ($query->result() as $row) {
 			// 	$adviserId = $row->emp_id;

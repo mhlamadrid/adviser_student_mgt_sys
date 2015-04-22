@@ -3,7 +3,6 @@
 class Admin_control extends CI_Controller {
     function __construct() {
         parent::__construct();
-		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh'); //added
 		$this->load->model('filtered_search_adviser_model', 'adviser_mdl', TRUE);
 		$this->load->model('filtered_search_student_model', 'student_mdl', TRUE);
 		$this->load->model('announcement_model', 'ann_mdl', TRUE);
@@ -11,12 +10,7 @@ class Admin_control extends CI_Controller {
     }
 	
 	function index(){
-		//if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh');
-
-		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
-		header('Cache-Control: no-store, no-cache, must-revalidate');
-		header('Cache-Control: post-check=0, pre-check=0', FALSE);
-		header('Pragma: no-cache');		
+		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh');
 		
 		$session_data = $this->session->userdata('logged_in');
 		
@@ -24,9 +18,6 @@ class Admin_control extends CI_Controller {
 		$data['username'] = $session_data['username'];
 		$data['role'] = $session_data['role'];
 		$data['notifications'] = array("Notif 1", "Notif 2");
-		$data['announcements'] = $this->ann_mdl->get_latest_entries(10);
-		$data['advisers'] = $this->adviser_mdl->get_all();
-		$data['students'] = $this->student_mdl->get_all();
 		
 		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);
 	}
@@ -34,6 +25,12 @@ class Admin_control extends CI_Controller {
 	/*
 	*	ANNOUNCEMENT related FUNCTIONS
 	*/
+	public function get_announcements()
+	{
+		$data['announcements'] = $this->ann_mdl->get_all();
+		$this->load->view('admin/search_results_announcement', $data);
+	}
+	
 	public function add_announcement()
 	{
 		$this->load->library('form_validation');
@@ -127,45 +124,37 @@ class Admin_control extends CI_Controller {
 	/*
 	*	STUDENT TAB related FUNCTIONS
 	*/
+	public function get_students()
+	{
+		$data['search_param'] = null;
+		$data['students'] = $this->student_mdl->get_all();
+		$this->load->view('admin/search_results_student', $data);
+	}
 	
 	function search_student(){
-		/*
-		$session_data = $this->session->userdata('logged_in');
+		$srch_param = $this->input->post('srch_param');
 		
-		//DATA
-		$data['username'] = $session_data['username'];
-		$data['role'] = $session_data['role'];
-		$data['notifications'] = array("Notif 1", "Notif 2");
-		$data['announcements'] = $this->ann_mdl->get_latest_entries(10);
-		$data['advisers'] = $this->adviser_mdl->get_all();
-		//											return likely results
-		$data['students'] = $this->student_mdl->get_by_name($this->input->post('search_student_text'),);
-		
-		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);
-		*/
-		redirect('Admin_control', 'refresh');
+		$data['search_param'] = $srch_param;
+		$data['students'] = $this->student_mdl->get_all();
+		$this->load->view('admin/search_results_student', $data);
 	}
 	
 	/*
 	*	ADVISER TAB related FUNCTIONS
 	*/
+	public function get_advisers()
+	{
+		$data['search_param'] = null;
+		$data['advisers'] = $this->adviser_mdl->get_all();
+		$this->load->view('admin/search_results_adviser', $data);
+	}
 	
 	function search_adviser(){
-		/*
-		$session_data = $this->session->userdata('logged_in');
+		$srch_param = $this->input->post('srch_param');
 		
-		//DATA
-		$data['username'] = $session_data['username'];
-		$data['role'] = $session_data['role'];
-		$data['notifications'] = array("Notif 1", "Notif 2");
-		$data['announcements'] = $this->ann_mdl->get_latest_entries(10);
-		//								return likely results
-		$data['advisers'] = $this->adviser_mdl->get_by_name($this->input->post('search_adviser_text'),);
-		$data['students'] = $this->student_mdl->get_all();
-		
-		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);
-		*/
-		redirect('Admin_control', 'refresh');
+		$data['search_param'] = $srch_param;
+		$data['advisers'] = $this->adviser_mdl->get_all();
+		$this->load->view('admin/search_results_adviser', $data);
 	}
 	
 }

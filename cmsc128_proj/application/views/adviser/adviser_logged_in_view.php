@@ -7,6 +7,9 @@
 	echo link_tag(base_url('css/common.css'));
 	echo script_tag(base_url('js/jquery-1.11.2.min.js'));
 	echo script_tag(base_url('js/bootstrap.js'));
+	echo link_tag(base_url('css/graph.css'));
+	echo script_tag(base_url('js/graph.js'));
+	echo script_tag(base_url('js/snap.svg.js'));
 ?>
 
 	<script>
@@ -35,12 +38,12 @@
 	</style>	
  </head>
  <body>	
-	<!---Header-->
+	<!---Header--->
 	<?Php $this->load->view('header_view');?>
 	
-	<!--MODAL-->	
+	<!--MODAL--------------------------------------------->	
     <div>
-		<?php $this->load->view('adviser/student_modal');?>
+		<?Php $this->load->view('adviser/student_modal');?>
     </div>
 	  
 	<div class="container">
@@ -62,7 +65,7 @@
 			</div>
 			
 			<div class="col-xs-12 col-sm-9 col-md-9">
-			<!--TABS-->
+			<!--TABS----------------------------------------------------------------------------------------------------->
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<ul class="nav nav-tabs" role="tablist" id="myTab">
@@ -73,32 +76,23 @@
 						</ul>
 
 						<div class="tab-content"> 
-						<?php 
+						<?Php 
 							$this->load->view('adviser/tab_acad');
 							$this->load->view('adviser/tab_doc');
 							$this->load->view('adviser/tab_search');
 							$this->load->view('adviser/tab_sample');
 						?>
 						</div>
-						
-						<div style="position: relative; height: 250px">
-							<?php
-								$this->load->view('adviser/list_of_advisees');
-							?>
-						</div>
-						
 					</div>
 				</div>
-			<!--TABS-->
+			<!--TABS----------------------------------------------------------------------------------------------------->
 			</div>
-			
 		</div>
 		
-		
     </div><!-- /.container -->
-		
-	<!---Footer-->
-	<?php $this->load->view('footer_view');?>
+	
+	<!---Footer--->
+	<?Php $this->load->view('footer_view');?>
 	
  </body>
 </html>

@@ -3,19 +3,12 @@
 class Student_control extends CI_Controller {
     function __construct() {
         parent::__construct();
-		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh'); //added		
         $this->load->model('student_request_model');
         $this->load->helper(array('url', 'array'));
     }
-
-    function index(){
-		//if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh');
-
-		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
-		header('Cache-Control: no-store, no-cache, must-revalidate');
-		header('Cache-Control: post-check=0, pre-check=0', FALSE);
-		header('Pragma: no-cache');				
-		
+	
+	function index(){
+		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh');
 		$this->view(null);
 
 	}	
@@ -32,7 +25,7 @@ class Student_control extends CI_Controller {
 		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);
 	}
 
-    /* Request Contact info approve/reject request */
+	/* Request Contact info approve/reject request */
     public function studentShowNotifs(){
     	$session_data = $this->session->userdata('logged_in');
 		$this->view($this->student_request_model->studentShowNotifs($session_data['username']));
@@ -47,6 +40,7 @@ class Student_control extends CI_Controller {
 		$this->view($this->student_request_model->rejectRequest($this->input->post('msg_id')));
 	}
 	// end of request contact info
+    //
 }
 /* End of file verify_login.php */
 /* Location: ./application/controllers/verify_login.php */
