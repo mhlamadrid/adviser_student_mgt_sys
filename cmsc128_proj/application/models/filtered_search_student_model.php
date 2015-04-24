@@ -17,12 +17,25 @@ class Filtered_search_student_model extends CI_Model {
 	
 	public function get_by_name($stud_name)
 	{
-		return null;
+		$query = $this->db->query("SELECT * FROM student WHERE name LIKE '%$stud_name%'");
+		return $query->result();
 	}
 	
 	public function get_by_adviser($adviser_id)
 	{
-
+	/*	$query = $this->db->query("SELECT * FROM student_adviser WHERE emp_id=$adviser_id ");
+		foreach($query->result() as $row){
+			$ids = array(
+						foreach($row->stud_id as $a){
+							$query2 = $this->db->query("SELECT * FROM student WHERE stud_no=$a");
+							echo $query2->result();
+						}
+					);
+		
+		}
+		
+		return $ids;
+	*/
 	}
 	
 	public function get_by_adviser_by_name($adviser_id, $stud_name)

@@ -9,7 +9,7 @@
 </div>
 
 <script>
-	$(document).ready(function(){
+	//$(document).ready(function(){
 		$.ajax({
 			type: 'POST',
 				 
@@ -22,8 +22,8 @@
 				$("#result-announcements").html(resp);
 			},
 			error: function(){						
-				alert('Error while request..');
+				alert('Error while request announcements..');
 			}
 		});
-	});
+	//});
 </script>

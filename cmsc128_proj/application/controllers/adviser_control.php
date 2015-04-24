@@ -3,18 +3,26 @@
 class Adviser_control extends CI_Controller {
     function __construct() {
         parent::__construct();
+		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh'); //added
 		$this->load->model(array('filtered_search_student_model', 'adviser_request_model'));
-		$this->load->helper('form');
-    }
-
-    function index(){
-		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh');
-		$this->view(null);
-
+		$this->load->library('csvreader');
 	}
-
 	
-	function view($search_results){
+	function index(){
+		//if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh');
+		
+		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Cache-Control: post-check=0, pre-check=0', FALSE);
+		header('Pragma: no-cache');		
+		
+		$this->view(null);
+	}	
+	/*
+	*	SEARCH Related FUNCTIONS
+	*/
+	function view($search_results)
+	{
 		$session_data = $this->session->userdata('logged_in');
 		
 		//DATA
@@ -25,6 +33,9 @@ class Adviser_control extends CI_Controller {
 		$data['appointments'] = array("Appoint 1", "Appoint 2");
 		$data['search_results'] = $search_results;
 		
+		$filePath = 'C:\wamp\www\cmsc128_proj\application\views\adviser\dummy.csv';
+		$data['csvData'] = $this->csvreader->parse_file($filePath);
+		
 		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);
 	}
 	
@@ -32,13 +43,13 @@ class Adviser_control extends CI_Controller {
 	*	SEARCH Related FUNCTIONS
 	*/	
 	public function search_by_name(){
-		$adv_id = $this->session->userdata('logged_in');
+		//$adv_id = $this->input->post('adv_id');
 		$srch_param = $this->input->post('srch_param');
 		
 		$data['search_param'] = $srch_param;
-		$data['search_results'] = $this->filtered_search_student_model->get_all();
+		$data['students'] = $this->filtered_search_student_model->get_by_name($srch_param);
+	
 		$this->load->view('adviser/search_results', $data);
-
 	}
 	
 	public function search_registered()
@@ -86,7 +97,6 @@ class Adviser_control extends CI_Controller {
     	$session_data = $this->session->userdata('logged_in');
     	//seacrh for student pass to requestInfo();
     	$student_no =  $this->input->post('stud_num');
-    	echo $student_no;
     	$this->adviser_request_model->requestInfo($session_data['username'], $student_no);
     }
 
@@ -99,6 +109,9 @@ class Adviser_control extends CI_Controller {
 		);
 		//$this->load->view('adviser_request', $result); Load View
 	}
+	
+	
 }
 /* End of file verify_login.php */
 /* Location: ./application/controllers/verify_login.php */
+

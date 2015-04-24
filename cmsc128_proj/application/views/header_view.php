@@ -28,62 +28,8 @@
 	if($this->session->userdata('logged_in'))
 	{
 ?>       
-		<div id="navbar" class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<?Php if ($notifications){?>
-					<li class="dropdown nav">
-						<?Php
-							$ctr=0;
-							foreach($notifications as $row) $ctr++;
-						?>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<span class="glyphicon glyphicon-envelope"></span>
-							<?Php if ($ctr>0){?>
-								<span class="badge"><?=$ctr;?></span>
-							<?Php }?>	
-							&nbsp <span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu" role="menu">
-							<?Php	foreach($notifications as $row){ ?>
-								<li><a href="#"><?=$row;?></a></li>
-							<?Php 	}?>
-						</ul>			
-					</li>
-				<?Php }?>
-				<li class="dropdown nav">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<span class="glyphicon glyphicon-user"></span>
-						&nbsp <span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						<li>
-							<a href="#">
-							<?Php 
-								$image_properties = array(
-										'src'   => base_url('img/prof_pic.jpg'),
-										'alt'   => 'Me, demonstrating how to eat 4 slices of pizza at one time',
-										'class' => 'post_images img-thumbnail',
-										'width' => '120',
-										'height'=> '90',
-										'title' => 'That was quite a night',
-										'rel'   => 'lightbox'
-								);
-									echo img($image_properties);
-							?>
-							</a>
-						</li>
-						<li class="divider"></li>
-						<li>
-							<?= form_open('main_control/logout');?>
-							<!--<form method="post" action=''>-->
-							<div class="col-md-12">
-								<input class="btn btn-link form-control" type="submit" name="logout" value="logout"/>
-							</div>
-							</form>						
-						</li>
-					</ul>			
-				</li>
-          </ul>
+		<div class="collapse navbar-collapse" id="head-notifs">
+			
         </div><!--/.nav-collapse -->
 <?Php
 	//IF NOT LOGGED IN, navbar contains login form
@@ -91,7 +37,7 @@
 	else
 	{	
 ?>
-		<div id="navbar" class="collapse navbar-collapse">
+		<div class="collapse navbar-collapse">
 			<?= form_open('main_control/login', array( 'class' => "navbar-form navbar-right pull-right"));?>
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span><input type="text" class="form-control" aria-describedby="sizing-addon3" name = "username">
@@ -107,5 +53,37 @@
 ?>		
     </div>
 </nav>
-	
-	
+
+<?Php
+	//IF LOGGED IN, navbar contain notifs and account mgt
+	if($this->session->userdata('logged_in'))
+	{
+?>
+<script>
+	//$(document).ready(function(){
+		var id = "<?=$username?>"
+		$.ajax({
+			type: 'POST',
+				 
+			//We are going to make the request to the method "list_dropdown" in the match controller
+			url: '<?= site_url();?>/notifications_control', 
+			
+			//POST parameter to be sent with the tournament id
+			data: { user_id:id},
+			
+			//When the request is successfully completed, this function will be executed
+			success: function(resp) { 
+				//With the ".html()" method we include the html code returned by AJAX into the matches list
+				$("#head-notifs").html(resp);
+				//alert('Success while requests..' + resp);
+				
+			},
+			error: function(){						
+				alert('Error while requests notifications..');
+			}
+		});
+	//});
+</script>
+<?Php
+	}
+?>

@@ -56,7 +56,7 @@
 		
 	</div><!--End of Carousel-->
 		
-	<!---Footer--->
+	<!---Footer-->
 	<?Php $this->load->view('footer_view');?>
 
 	</body>

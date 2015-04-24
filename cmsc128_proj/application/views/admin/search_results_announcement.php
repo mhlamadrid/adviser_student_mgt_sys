@@ -9,16 +9,15 @@
 			echo anchor('#add_Modal',"<span class='glyphicon glyphicon-plus'></span> &nbsp; CREATE NEW ANNOUNCEMENT", $attr);
 
 			echo br();
-	if ($announcements != null){	?>
+	if ($announcements != null){	
+		echo form_open('admin_control/del_announcement');?>
 		<table class="table table-hover table-striped">
 			<th>Date Posted</th>
 			<th>Title</th>
 			<th>Body</th>
 			<th>Attachment</th>
 			<th></th>
-<?Php	foreach ($announcements as $row){
-			
-		echo form_open('admin_control/del_announcement');	?>
+<?Php	foreach ($announcements as $row){	?>
 			<tr>
 				<td>
 					<?= $row->date;?>
@@ -29,9 +28,9 @@
 				</td>
 						
 				<td>
-					<a class="tool-tip" data-toggle="tooltip" data-placement="right" title="<?= $row->body;?>">
-						preview of body...
-					</a>
+					<p class="tool-tip" data-toggle="tooltip" data-placement="right" title="<?= $row->body;?>">
+						<?= $row->body;?>
+					</p>
 				</td>
 						
 				<td>
@@ -57,10 +56,11 @@
 							&nbsp;
 							
 						<button type="submit" class="btn btn-link"> Delete <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
-					<?Php	echo form_close();	?>
 					</div>
 				</td>
 			</tr>
 <?Php	}	?>
 		</table>
-<?Php	}else echo heading("No Announcements.",4);	?>
+<?Php	
+		echo form_close();
+	}else echo heading("No Announcements.",4);	?>

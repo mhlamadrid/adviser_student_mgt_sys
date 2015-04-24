@@ -20,8 +20,10 @@ class Announcement_model extends CI_Model {
                 return $query->result();
         }
 
-        public function insert_entry($date, $title, $body)
+        public function insert_entry($title, $body)
         {
+				$this->load->helper('date');
+				$date = date('Y-m-d H:i:s');
 				$data = array(
 						'date' => $date,
 						'body' => $body,
@@ -31,8 +33,10 @@ class Announcement_model extends CI_Model {
                 $this->db->insert("announcement", $data);
         }
 
-        public function update_entry($id, $date, $title, $body)
+        public function update_entry($id, $title, $body)
         {
+				$this->load->helper('date');
+				$date = date('Y-m-d H:i:s');
 				$data = array(
 						'date' => $date,
 						'body' => $body,

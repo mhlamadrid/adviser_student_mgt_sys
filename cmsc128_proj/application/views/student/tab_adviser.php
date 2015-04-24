@@ -43,7 +43,12 @@
                     </table>
                 <?php } ?>
 			</div>
-			
+			<div>
+					<!--APPOINTMENT FORM-->
+					<?php $this->load->view('student/student_appointment');?>
+				</div>
+
+        <button type = "button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#generate_Modal">REQUEST FOR CHANGE IN THE APPROVED PLAN OF STUDY</button>
 		<!--Adviser tab HERE-->			
 		</div>
 	</div>

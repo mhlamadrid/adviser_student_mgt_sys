@@ -27,15 +27,15 @@
 							</div>
 
 							<div class="form-group">
-								<label for="date" class="col-sm-2 control-label">Date</label>
+								<label for="file" class="col-sm-2 control-label">File(s)</label>
 								<div class="col-sm-10">
 									<?Php	
 												$data = array(
-														  'type'	 	=> 'date',
+														  'type'	 	=> 'file',
 														  'class'       => "form-control",
-														  'id'			=> 'date',
-														  'name'        => 'date',
-														  'value'       => set_value('date'),
+														  'id'			=> 'file',
+														  'name'        => 'userfile[]',
+														  'multiple' => ''
 														);
 												echo form_input($data);
 									?>

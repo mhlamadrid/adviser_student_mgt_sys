@@ -54,6 +54,7 @@
 	<?Php $this->load->view('admin/announce_add_modal');?>
 	<?Php $this->load->view('admin/announce_edit_modal');?>
 	<?Php $this->load->view('admin/generate_account_modal');?>
+	<?Php $this->load->view('admin/update_records_modal');?>
 	
 	<!---Header--->
 	<?Php $this->load->view('header_view');?>

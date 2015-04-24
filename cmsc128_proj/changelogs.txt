@@ -27,9 +27,4 @@ added modals:
 	generate account
 	
 bugs:
-<<<<<<< HEAD
 	hitting back after logout.
-=======
-	hitting back after logout.
-ajax search
->>>>>>> origin/master

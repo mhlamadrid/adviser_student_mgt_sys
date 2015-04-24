@@ -24,7 +24,8 @@ class Filtered_search_adviser_model extends CI_Model {
 	
 	public function get_by_name($adviser_name)
 	{
-		return null;
+		$query = $this->db->query("SELECT * FROM adviser WHERE name LIKE '%$adviser_name%'");
+		return $query->result();
 	}
 }
   

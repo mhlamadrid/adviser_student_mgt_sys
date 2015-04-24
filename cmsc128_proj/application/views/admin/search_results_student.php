@@ -13,13 +13,26 @@
 				<!-- Blank space -->
 			</div>
 			<div class="col-lg-6">
-				<div class="input-group">
-					<input id="inp_stud_search" name="search_student_text" type="text" class="form-control" placeholder="Search for...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" onclick="search_student()">
-							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</button>
-					</span>
+				<div class="form-inline">
+					<div class="input-group">
+						<input id="inp_stud_search" name="search_student_text" type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" onclick="search_student()">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+						</span>
+					</div>
+					<div class="input-group">
+					  <?php 
+							$attr = array(
+								'role'          => 'button',
+								'class' 	  	=> "btn btn-primary",
+								'data-toggle' 	=> "modal",
+								'data-target' 	=> "#update_records_Modal",
+								);
+							echo anchor('#update_records_Modal',"UPDATE RECORDS <span class='glyphicon glyphicon-upload' aria-hidden='true'></span>",$attr);	
+						?>
+					</div>
 				</div>
 			</div><!-- /.col-lg-6 -->
 	<p>
@@ -83,4 +96,4 @@
 				</tr>
 <?Php	}	?>
 			</table>
-<?Php	}else echo heading("No Advisers.",4);	?>
+<?Php	}else echo heading("No Students.",4);	?>

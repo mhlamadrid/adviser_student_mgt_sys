@@ -3,6 +3,12 @@
 class Main_control extends CI_Controller {
     function __construct() {
         parent::__construct();
+		
+		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Cache-Control: post-check=0, pre-check=0', FALSE);
+		header('Pragma: no-cache');		
+
         //load session and connect to database
         $this->load->model('login_model','login',TRUE);
 		$this->load->model('announcement_model','announce_mdl', TRUE);
@@ -19,6 +25,7 @@ class Main_control extends CI_Controller {
 			$data['announcements'] = $this->announce_mdl->get_all();
             $this->load->view('login_view', $data);
         }
+
     }
 	 
 	function login(){
@@ -67,6 +74,20 @@ class Main_control extends CI_Controller {
 	  
 	function refresh_page() {  
 		redirect('a_123456789', 'refresh');		  	  
+	}
+
+	function profile() {
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$data['role'] = $session_data['role'];
+		$data['notifications'] = null;
+		//$data['result'] = $result;
+		$this->load->view($session_data['role'].'/'.$session_data['role'].'_profile', $data);
+	}
+
+	function change_password() {
+		$this->login->change_password($this->session->userdata('logged_in')['username'], $_POST['password']);
+		redirect('main_control');
 	}
 }
 /* End of file verify_login.php */

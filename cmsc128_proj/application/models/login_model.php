@@ -22,6 +22,11 @@ class Login_model extends CI_Model {
             return false; //if data is wrong
         }
     }
+
+    function change_password($username, $password){
+        $password=MD5($password);
+        $this->db->query("UPDATE public.user SET password='$password' WHERE username='$username'");
+    }
 }
   
 /* End of file admin_login_model.php */

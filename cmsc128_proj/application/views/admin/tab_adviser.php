@@ -9,7 +9,7 @@
 </div>
 
 <script>
-	$(document).ready(function(){
+	//$(document).ready(function(){
 		$.ajax({
 			type: 'POST',
 				 
@@ -25,7 +25,7 @@
 				alert('Error while request..');
 			}
 		});
-	});
+	//});
 	
 	function search_adviser()
 	{

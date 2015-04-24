@@ -26,7 +26,9 @@
 			  .trigger( "change" );
 			
 			$('.btn-search').click(function(){
+
 			  $('#myTab a[href="#tab_search"]').tab('show');
+
 			})
 		});
 	</script>
@@ -38,12 +40,13 @@
 	</style>	
  </head>
  <body>	
-	<!---Header--->
+	<!---Header-->
 	<?Php $this->load->view('header_view');?>
 	
-	<!--MODAL--------------------------------------------->	
+	<!--MODAL-->	
     <div>
-		<?Php $this->load->view('adviser/student_modal');?>
+		<?php $this->load->view('adviser/student_modal');?>
+		<?php $this->load->view('adviser/account_settings_modal');?>
     </div>
 	  
 	<div class="container">
@@ -65,7 +68,7 @@
 			</div>
 			
 			<div class="col-xs-12 col-sm-9 col-md-9">
-			<!--TABS----------------------------------------------------------------------------------------------------->
+			<!--TABS-->
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<ul class="nav nav-tabs" role="tablist" id="myTab">
@@ -76,23 +79,26 @@
 						</ul>
 
 						<div class="tab-content"> 
-						<?Php 
+						<?php 
 							$this->load->view('adviser/tab_acad');
 							$this->load->view('adviser/tab_doc');
 							$this->load->view('adviser/tab_search');
 							$this->load->view('adviser/tab_sample');
 						?>
 						</div>
+						
 					</div>
 				</div>
-			<!--TABS----------------------------------------------------------------------------------------------------->
+			<!--TABS-->
 			</div>
+			
 		</div>
 		
+		
     </div><!-- /.container -->
-	
-	<!---Footer--->
-	<?Php $this->load->view('footer_view');?>
+		
+	<!---Footer-->
+	<?php $this->load->view('footer_view');?>
 	
  </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
  <head>
    <title>Student Page</title>
    
@@ -21,11 +21,14 @@
 	</style>	
  </head>
  <body>	
-	<!--MODAL-------------------------------------------->
-	<?Php $this->load->view('student/curriculum_modal');?>
-	<!--MODAL-------------------------------------------->
+	<!--MODAL-->
+	<?php $this->load->view('student/curriculum_modal');?>
+	<?php $this->load->view('student/account_settings_modal');?>
+	<?Php $this->load->view('student/form_modal');?>
 
-	<!---Header--->
+	<!--MODAL-->
+
+	<!---Header-->
 	<?Php $this->load->view('header_view');?>
 
 	<div class="container">
@@ -37,33 +40,35 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-9 col-md-9">
-			<!--TABS----------------------------------------------------------------------------------------------------->
+			<!--TABS-->
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<ul class="nav nav-tabs" role="tablist" id="myTab">
 						  <li role="presentation" class="active"><a href="#tab_announce" aria-controls="home" role="tab" data-toggle="tab"><?= heading("ANNOUNCEMENTS", 4)?></a></li>
 						  <li role="presentation"><a href="#tab_adviser" aria-controls="profile" role="tab" data-toggle="tab"><?= heading("ADVISER", 4)?></a></li>
+						  <li role="presentation"><a href="#tab_documents" aria-controls="docs" role="tab" data-toggle="tab"><?= heading("DOCUMENTS", 4)?></a></li>
 						</ul>
 
 						<div class="tab-content"> 
 						<?Php 
 							$this->load->view('student/tab_announce');
 							$this->load->view('student/tab_adviser');
+							$this->load->view('student/tab_documents');
 						?>
 						</div>
 					</div>
 				</div>
-			<!--TABS----------------------------------------------------------------------------------------------------->
+			<!--TABS-->
 			</div>
 			
 			<div class="col-xs-12 col-sm-3 col-md-3">
-				<?Php $this->load->view('student/student_panel');?>
+				<?php $this->load->view('student/student_panel');?>
 			</div>
 		</div>
 	</div>
 	
-	<!---Footer--->
-	<?Php $this->load->view('footer_view');?>
+	<!---Footer-->
+	<?php $this->load->view('footer_view');?>
 	
  </body>
 </html>
