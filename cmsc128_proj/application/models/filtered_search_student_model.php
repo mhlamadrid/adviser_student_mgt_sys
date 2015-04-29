@@ -15,6 +15,11 @@ class Filtered_search_student_model extends CI_Model {
 		return $query->result();
 	}
 	
+	public function get_has_contact(){
+		$query = $this->db->get('student_adviser');
+		return $query->result();
+	}
+
 	public function get_by_name($stud_name)
 	{
 		$query = $this->db->query("SELECT * FROM student WHERE name LIKE '%$stud_name%'");

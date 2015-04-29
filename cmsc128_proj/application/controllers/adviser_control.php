@@ -4,7 +4,7 @@ class Adviser_control extends CI_Controller {
     function __construct() {
         parent::__construct();
 		if(!$this->session->userdata('logged_in')) redirect('main_control', 'refresh'); //added
-		$this->load->model(array('filtered_search_student_model', 'adviser_request_model'));
+		$this->load->model(array('filtered_search_student_model', 'adviser_request_model', 'graph_model'));
 		$this->load->library('csvreader');
 	}
 	
@@ -14,9 +14,10 @@ class Adviser_control extends CI_Controller {
 		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 		header('Cache-Control: no-store, no-cache, must-revalidate');
 		header('Cache-Control: post-check=0, pre-check=0', FALSE);
-		header('Pragma: no-cache');		
+		header('Pragma: no-cache');
+		$data = $this->graph_model->student_info();
 		
-		$this->view(null);
+		$this->view($data);
 	}	
 	/*
 	*	SEARCH Related FUNCTIONS
@@ -32,11 +33,11 @@ class Adviser_control extends CI_Controller {
 		$data['notifications'] = array("Notif 1", "Notif 2");
 		$data['appointments'] = array("Appoint 1", "Appoint 2");
 		$data['search_results'] = $search_results;
-		
+
 		$filePath = 'C:\wamp\www\cmsc128_proj\application\views\adviser\dummy.csv';
 		$data['csvData'] = $this->csvreader->parse_file($filePath);
 		
-		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);
+		$this->load->view($session_data['role'].'/'.$session_data['role'].'_logged_in_view', $data);		
 	}
 	
 	/*
@@ -48,7 +49,7 @@ class Adviser_control extends CI_Controller {
 		
 		$data['search_param'] = $srch_param;
 		$data['students'] = $this->filtered_search_student_model->get_by_name($srch_param);
-	
+		$data['has_contact'] = $this->filtered_search_student_model->get_has_contact();
 		$this->load->view('adviser/search_results', $data);
 	}
 	

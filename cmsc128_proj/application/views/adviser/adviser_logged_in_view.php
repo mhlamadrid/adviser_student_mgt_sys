@@ -8,9 +8,10 @@
 	echo script_tag(base_url('js/jquery-1.11.2.min.js'));
 	echo script_tag(base_url('js/bootstrap.js'));
 	echo link_tag(base_url('css/graph.css'));
-	echo script_tag(base_url('js/graph.js'));
 	echo script_tag(base_url('js/snap.svg.js'));
 ?>
+
+	<script type = "text/javascript" src = "<?=base_url();?>/js/graph.js?rev=<?php echo time(); ?>"></script>
 
 	<script>
 		$(document).ready(function(){

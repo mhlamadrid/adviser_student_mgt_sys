@@ -25,7 +25,19 @@
 					</td>
 							
 					<td>
-						<?= $row->name;?>
+						<?Php
+							$attr = array(
+								'data-toggle' => "modal",
+								'data-target' => "#view_Modal",
+								'data-id' => $row->stud_no,
+								'data-name' => $row->name,
+								'data-classification' => $row->classification,
+								'data-status' => $row->status,
+								'data-email_add' => $row->email_add,
+								'data-contact_no' => $row->contact_no
+								);
+							echo anchor('view_Modal', "{$row->name}", $attr);
+						?>
 					</td>
 							
 					<td>
@@ -41,18 +53,37 @@
 					</td>
 							
 					<td>
-						<?= $row->contact_no;?>
+						<?php
+							foreach ($has_contact as $row1) {
+								if ($row1->stud_no === $row->stud_no) {
+									if ($row1->has_contact === 't') {
+										echo $row->contact_no;
+										break;										
+									}
+									else{
+										echo "Contact Information Unavailable";
+									
+						?>
 					</td>
 							
 					<td>
 						<div class="btn-group btn-block">
 						<?Php						
-							$attr = array(
-									'value'       => 'Do Something',
-									'class' 	  => "btn btn-primary",
+							echo "<div class='btn-group btn-block'>";
+								echo "<input type='hidden' id='hide' value='".$row->stud_no."'/>";
+								$attr = array(
+										'id' => $row->stud_no,
+										'class' => "btn btn-default",
+										'value' =>  "Request",
+										'onclick' => 'request_contact();request_sent()'
 									);
-							echo form_submit($attr);
-							echo form_close();
+								echo form_input($attr);
+								echo form_close();
+							echo "</div>";
+							echo "</td>";//ayusin UI
+								}
+							}
+						}
 						?>
 						</div>
 					</td>
